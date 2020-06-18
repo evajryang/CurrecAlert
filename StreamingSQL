@@ -9,7 +9,7 @@ CREATE OR REPLACE PUMP "STREAM_PUMP" AS
       SELECT STREAM COL_bidprice, 
                     COL_askprice,
       FROM   "SOURCE_SQL_STREAM_001"
-      WHERE  ABS(COL_bidprice-COL_askprice)=spread)
+      WHERE  ABS((COL_bidprice-COL_askprice)=spread)
 
 -- Calculate min, max and average for Bid price. 
 CREATE OR REPLACE STREAM "DESTINATION_SQL_STREAM" (
