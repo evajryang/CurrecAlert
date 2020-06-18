@@ -1,48 +1,47 @@
-CREATE OR REPLACE STREAM "SOURCE_SQL_STREAM_001" (
-                         COL_bidprice VARCHAR(3), 
-                         Min_Price     double, 
-                         Max_Price     double, 
-                         Avg_Price     double);
+-- CALCULATE the spread 
+ CREATE OR REPLACE STREAM "DESTINATION_SQL_STREAM" (
+                            COL_bidprice INTEGER,
+                            COL_askprice INTEGER,
+                            spread double);
+-- CREATE OR REPLACE PUMP to insert into output
 CREATE OR REPLACE PUMP "STREAM_PUMP" AS 
-   INSERT INTO "SOURCE_SQL_STREAM_001"
+  INSERT INTO "DESTINATION_SQL_STREAM" 
+      SELECT STREAM COL_bidprice, 
+                    COL_askprice,
+      FROM   "SOURCE_SQL_STREAM_001"
+      WHERE  ABS(COL_bidprice-COL_askprice)=spread)
+
+-- Calculate min, max and average for Bid price. 
+CREATE OR REPLACE STREAM "DESTINATION_SQL_STREAM" (
+                         COL_bidprice INTEGER, 
+                         Min_bidPrice double, 
+                         Max_bidPrice double, 
+                         Avg_bidPrice double);
+CREATE OR REPLACE PUMP "STREAM_PUMP" AS 
+   INSERT INTO "DESTINATION_SQL_STREAM"
      SELECT STREAM COL_bidprice,
-                   MIN(Price) OVER W1 AS Min_Price,
-                   MAX(Price) OVER W1 AS Max_Price,
-                   AVG(Price) OVER W1 AS Avg_Price
+                   MIN(Price) OVER W1 AS Min_bidPrice,
+                   MAX(Price) OVER W1 AS Max_bidPrice,
+                   AVG(Price) OVER W1 AS Avg_bidPrice
      FROM   "SOURCE_SQL_STREAM_001"
      WINDOW W1 AS (
         PARTITION BY COL_bidprice 
-        RANGE INTERVAL '1' MINUTE PRECEDING); 
-
-CREATE OR REPLACE STREAM "SOURCE_SQL_STREAM_001" (
-                         COL_askprice VARCHAR(3), 
+        RANGE INTERVAL '1' MINUTE PRECEDING);     
+-- Calculate min, max and average for Ask Price 
+CREATE OR REPLACE STREAM "DESTINATION_SQL_STREAM" (
+                         COL_askprice INTEGER, 
                          Min_Price     double, 
                          Max_Price     double, 
                          Avg_Price     double);
 CREATE OR REPLACE PUMP "STREAM_PUMP" AS 
-   INSERT INTO "SOURCE_SQL_STREAM_001"
+   INSERT INTO "DESTINATION_SQL_STREAM"
      SELECT STREAM COL_askprice,
-                   MIN(Price) OVER W1 AS Min_Price,
-                   MAX(Price) OVER W1 AS Max_Price,
-                   AVG(Price) OVER W1 AS Avg_Price
+                   MIN(Price) OVER W1 AS Min_askPrice,
+                   MAX(Price) OVER W1 AS Max_askPrice,
+                   AVG(Price) OVER W1 AS Avg_askPrice
      FROM   "SOURCE_SQL_STREAM_001"
      WINDOW W1 AS (
         PARTITION BY COL_askprice 
-        RANGE INTERVAL '1' MINUTE PRECEDING); 
+        RANGE INTERVAL '1' MINUTE PRECEDING);     
 
--- ** Simple alert **
--- Emits rows matching criteria from sliding window aggregates
--- Useful for real-time monitoring use cases
-CREATE OR REPLACE STREAM "SOURCE_SQL_STREAM_001" (
-   !!!!!!, 
-   avg_change double);
-CREATE OR REPLACE PUMP "STREAM_PUMP" AS INSERT INTO "SOURCE_SQL_STREAM_001"
-SELECT STREAM COL_bidprice, avg_change
-FROM (
-    SELECT STREAM
-        ticker_symbol, 
-        AVG(change) OVER W1 as avg_change
-    FROM "SOURCE_SQL_STREAM_001"
-    WINDOW W1 AS (PARTITION BY ticker_symbol RANGE INTERVAL '10' SECOND PRECEDING)
-)
-WHERE ABS(avg_change) > 1;
+
