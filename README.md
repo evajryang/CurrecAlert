@@ -25,7 +25,7 @@ Forex trading difficulties:
 # DE challenges: 
 
 1.How to unify real time and historic data platform
-2. Batch computations and running queries against historical data
-3. How to simulate the real-time scenario 
+2. Streaming SQL syntax 
+3. Simulate the real-time data
 
 
