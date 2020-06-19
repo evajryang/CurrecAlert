@@ -1,38 +1,39 @@
--- CALCULATE the spread 
+-- Calculate the spread 
  CREATE OR REPLACE STREAM "DESTINATION_SQL_STREAM" (
-                            COL_bidprice INTEGER,
-                            COL_askprice INTEGER,
+                            COL_bidprice double,
+                            COL_askprice double,
                             spread double);
--- CREATE OR REPLACE PUMP to insert into output
-CREATE OR REPLACE PUMP "STREAM_PUMP" AS 
+-- CREATE OR REPLACE PUMP1 to insert into output
+CREATE OR REPLACE PUMP1 "STREAM_PUMP1" AS 
   INSERT INTO "DESTINATION_SQL_STREAM" 
       SELECT STREAM COL_bidprice, 
                     COL_askprice,
       FROM   "SOURCE_SQL_STREAM_001"
-      WHERE  ABS((COL_bidprice-COL_askprice)=spread)
+      WHERE  ABS(COL_bidprice-COL_askprice)=spread)
 
 -- Calculate min, max and average for Bid price. 
 CREATE OR REPLACE STREAM "DESTINATION_SQL_STREAM" (
-                         COL_bidprice INTEGER, 
+                         COL_bidprice double, 
                          Min_bidPrice double, 
                          Max_bidPrice double, 
                          Avg_bidPrice double);
-CREATE OR REPLACE PUMP "STREAM_PUMP" AS 
+CREATE OR REPLACE PUMP2 "STREAM_PUMP2" AS 
    INSERT INTO "DESTINATION_SQL_STREAM"
      SELECT STREAM COL_bidprice,
                    MIN(Price) OVER W1 AS Min_bidPrice,
                    MAX(Price) OVER W1 AS Max_bidPrice,
                    AVG(Price) OVER W1 AS Avg_bidPrice
-     FROM   "SOURCE_SQL_STREAM_001"
+     FROM   "SOURCE_SQL_STREAM_002"
      WINDOW W1 AS (
         PARTITION BY COL_bidprice 
         RANGE INTERVAL '1' MINUTE PRECEDING);     
+        
 -- Calculate min, max and average for Ask Price 
 CREATE OR REPLACE STREAM "DESTINATION_SQL_STREAM" (
-                         COL_askprice INTEGER, 
-                         Min_Price     double, 
-                         Max_Price     double, 
-                         Avg_Price     double);
+                         COL_askprice     double, 
+                         Min_askPrice     double, 
+                         Max_askPrice     double, 
+                         Avg_askPrice     double);
 CREATE OR REPLACE PUMP "STREAM_PUMP" AS 
    INSERT INTO "DESTINATION_SQL_STREAM"
      SELECT STREAM COL_askprice,
@@ -43,5 +44,44 @@ CREATE OR REPLACE PUMP "STREAM_PUMP" AS
      WINDOW W1 AS (
         PARTITION BY COL_askprice 
         RANGE INTERVAL '1' MINUTE PRECEDING);     
-
+--Calculate the lowest spread
+ CREATE OR REPLACE STREAM "DESTINATION_SQL_STREAM" (
+                            Max_askPrice     double,
+                            Min_bidPrice     double，
+                            lowest spread    double);
+-- CREATE OR REPLACE PUMP to insert into output
+CREATE OR REPLACE PUMP "STREAM_PUMP" AS 
+  INSERT INTO "DESTINATION_SQL_STREAM" 
+      SELECT STREAM COL_bidprice, 
+                    COL_askprice,
+      FROM   "SOURCE_SQL_STREAM_001"
+      WHERE  ABS(Min_bidPrice-Max_askPrice)=lowest spread)
+     
+--Calculate the highest spread
+ CREATE OR REPLACE STREAM "DESTINATION_SQL_STREAM" (
+                            Min_askPrice     double,
+                            Max_bidPrice     double，
+                            highest spread   double);
+-- CREATE OR REPLACE PUMP to insert into output
+CREATE OR REPLACE PUMP "STREAM_PUMP" AS 
+  INSERT INTO "DESTINATION_SQL_STREAM"
+      SELECT STREAM COL_bidprice, 
+                    COL_askprice,
+      FROM   "SOURCE_SQL_STREAM_001"
+      WHERE  ABS(Max_bidPrice-Min_askPrice)=highest spread)
+      
+-- ** alert calculations**
+-- Emits rows matching criteria from sliding window aggregates
+CREATE OR REPLACE STREAM "DESTINATION_SQL_STREAM" (
+   highest spread, double,
+   lowest spread,  double);
+CREATE OR REPLACE PUMP "STREAM_PUMP" AS INSERT INTO "DESTINATION_SQL_STREAM"
+SELECT STREAM spread, lowest spread, highest spread, 
+FROM (
+    SELECT STREAM spread, 
+              OVER W1 as spread,
+    FROM "SOURCE_SQL_STREAM_001"
+    WINDOW W1 AS (PARTITION BY spread RANGE INTERVAL '10' SECOND PRECEDING)
+)
+WHERE ABS(spread<lowest spread OR spread>highest spread);
 
