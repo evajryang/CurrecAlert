@@ -1,5 +1,5 @@
 # Forextradingalert
-forex data
+Forex market trading alerts 
 
 # Motivation: 
 
