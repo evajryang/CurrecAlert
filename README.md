@@ -1,6 +1,8 @@
 # Forextradingalert
 Forex market trading alerts 
 
+Link to presentation slides: https://docs.google.com/presentation/d/1R0ESidd64gPjYqHt0fPXdwmmVc_G9hCw0Tk4-ybiU24/edit?usp=sharing
+
 # Motivation: 
 For traders in the Forex Market, high liquidity represents higher chance to identify best real-time trading opportunities. 
 
@@ -12,7 +14,7 @@ Forex trading difficulties:
 5. Economic and political situations affections
 
 # Architecture
-Images/Architecture.png
+![pipeline](https://github.com/evajryang/Forextradingalert/blob/master/Images/Architecture.png)
 
 # Business Solution: 
 #To create alerts to discover real-time currency spread trading opportunities. 
