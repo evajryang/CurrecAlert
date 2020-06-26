@@ -11,13 +11,16 @@ Forex trading difficulties:
 4. Global high-frequency trading hour difference 
 5. Economic and political situations affections
 
+# Architecture
+Images/Architecture.png
+
 # Business Solution: 
 #To create alerts to discover real-time currency spread trading opportunities. 
 
 Details: To help them identify the real-time opprotunities, this tool is created to build a real-time spread monitor. 
 
 # users: 
-#part-time Forex trader, Beginner and individuals. 
+#high-frequency traders, high-freqeuncy tading companies.  
 
 # Data source: 
 #Forex quote data, 200 GB.
