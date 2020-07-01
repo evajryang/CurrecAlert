@@ -28,9 +28,9 @@ import lazyreader
 #        return count
 
 
-aws_access_key_id = 'AKIA3GHR5RILA4IXVXBJ'    #aws connection id
-aws_secret_access_key = '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'   #aws connection key pair
-bucket_name = 'forexdata2000-2018'  #bucket name
+aws_access_key_id = '**********'    #aws connection id
+aws_secret_access_key = '*********************'   #aws connection key pair
+bucket_name = 'forexdata*********'  #bucket name
 
 class CsvEngine:
     def __init__(self):
