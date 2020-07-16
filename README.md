@@ -2,6 +2,7 @@
 Forex market trading alerts 
 
 Link to presentation slides: https://docs.google.com/presentation/d/1R0ESidd64gPjYqHt0fPXdwmmVc_G9hCw0Tk4-ybiU24/edit?usp=sharing
+
 Live demo: https://youtu.be/Jpf3ZJo2UVs
 
 # Motivation: 
