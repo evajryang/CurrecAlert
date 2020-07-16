@@ -14,7 +14,7 @@ Forex trading difficulties:
 5. Economic and political situations affections
 
 # Architecture
-![pipeline](https://github.com/evajryang/Forextradingalert/blob/master/Images/Architecture.png)
+![pipeline](https://github.com/evajryang/CurrecAlert/blob/master/Images/CurrecAlert_Pipeline.png)
 
 # Business Solution: 
 #To create alerts to discover real-time currency spread trading opportunities. 
