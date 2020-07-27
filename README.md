@@ -37,4 +37,7 @@ Details: To help them identify the real-time opprotunities, this tool is created
 1.How to unify real time and historic data platform
 2. Simulate the real-time data
 
+# Website development: 
+#link: databeats.club
+
 
