@@ -43,5 +43,5 @@ def register():
 
 if __name__ == '__main__':
     if not os.path.exists('db/users.db'):
-        buildingDB() #建数据库
+        buildingDB() #builddatabase
     app.run(host='0.0.0.0',debug=True, port=8080,threaded=True,processes=1)
