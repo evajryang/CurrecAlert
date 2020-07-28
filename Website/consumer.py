@@ -231,8 +231,8 @@ def sql_insert(conn, entities):
 def alert_reminder(date,history_spread,current_spread):
     if history_spread > current_spread:
         with open('lowest_spread_record.csv','a',encoding='utf-8') as f:
-            print('{} 出现最低点差'.format(date))
-            print('{} 出现最低点差'.format(date),file=f)
+            print('{} lowestspread'.format(date))
+            print('{} lowestspread'.format(date),file=f)
         history_spread = current_spread 
 
         time.sleep(5)  
@@ -353,13 +353,13 @@ def run_consumer(consumer):
                     max_ask_price_daily,min_ask_price_daily,avg_ask_price_daily, \
                     max_spread_daily,min_spread_daily,avg_spread_daily = max_min_avg(data_daily)
     
-                print('{} 天 最低点差是：{}'.format(date_daily,min_spread_daily))
+                print('{} day lowestspreadis：{}'.format(date_daily,min_spread_daily))
                
                 history_spread = min_spread_daily
                 msg_value['current_lowest_spread'] = history_spread
 #                
                 history_spread = 100
-                print('更新后的历史点差为：{}'.format(history_spread))
+                print('historicalspreadafterupdate：{}'.format(history_spread))
                 
                 ## 
                 df_daily = pd.DataFrame(data_daily)
