@@ -42,4 +42,5 @@ Details: To help them identify the real-time opprotunities, this tool is created
 
 ![website](https://github.com/evajryang/CurrecAlert/blob/master/Images/website%20main%20page.jpg)
 ![Spreadtracker](https://github.com/evajryang/CurrecAlert/blob/master/Images/trackerUI.png)
+![Alert system](https://github.com/evajryang/CurrecAlert/blob/master/Images/Alertsystem.png)
 ![Aboutme](https://github.com/evajryang/CurrecAlert/blob/master/Images/website%20main%20page2.jpg)
