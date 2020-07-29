@@ -41,3 +41,4 @@ Details: To help them identify the real-time opprotunities, this tool is created
 #link: databeats.club
 
 ![website](https://github.com/evajryang/CurrecAlert/blob/master/Images/website%20main%20page.jpg)
+！[About me](https://github.com/evajryang/CurrecAlert/blob/master/Images/website%20main%20page2.jpg)
