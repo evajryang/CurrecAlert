@@ -2,7 +2,7 @@
 Forex market trading alerts 
 
 Link to presentation slides: https://docs.google.com/presentation/d/1R0ESidd64gPjYqHt0fPXdwmmVc_G9hCw0Tk4-ybiU24/edit?usp=sharing
-
+UI: https://youtu.be/m4gHTN6ZPmU
 Live demo: https://youtu.be/Jpf3ZJo2UVs
 
 # Motivation: 
@@ -38,7 +38,8 @@ Details: To help them identify the real-time opprotunities, this tool is created
 2. Simulate the real-time data
 
 # Website development: 
-#link: databeats.club
+#link: http://54.200.182.135/ (databeats.club)
+Demo: https://youtu.be/m4gHTN6ZPmU
 
 ![website](https://github.com/evajryang/CurrecAlert/blob/master/Images/website%20main%20page.jpg)
 ![Spreadtracker](https://github.com/evajryang/CurrecAlert/blob/master/Images/trackerUI.png)
