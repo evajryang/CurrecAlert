@@ -3,7 +3,7 @@ Forex market trading alerts
 
 Link to presentation slides: https://docs.google.com/presentation/d/1R0ESidd64gPjYqHt0fPXdwmmVc_G9hCw0Tk4-ybiU24/edit?usp=sharing
 UI: https://youtu.be/m4gHTN6ZPmU
-Live demo: https://youtu.be/Jpf3ZJo2UVs
+
 
 # Motivation: 
 For traders in the Forex Market, high liquidity represents higher chance to identify best real-time trading opportunities. 
@@ -45,3 +45,6 @@ Demo: https://youtu.be/m4gHTN6ZPmU
 ![Spreadtracker](https://github.com/evajryang/CurrecAlert/blob/master/Images/trackerUI.png)
 ![Alert system](https://github.com/evajryang/CurrecAlert/blob/master/Images/Alertsystem.png)
 ![Aboutme](https://github.com/evajryang/CurrecAlert/blob/master/Images/website%20main%20page2.jpg)
+
+
+Live demo: https://youtu.be/Jpf3ZJo2UVs
